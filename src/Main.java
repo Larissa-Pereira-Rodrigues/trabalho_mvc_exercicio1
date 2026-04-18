@@ -1,28 +1,17 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
 
-        Cliente c1 = new Cliente("Larissa", "99999-9999");
+        Cliente c = new Cliente("Larissa", "99999");
+        Horario h = new Horario("18:00", 100);
 
-        Horario h1 = new Horario("18:00", 100);
-        Horario h2 = new Horario("19:00", 100);
+        Aluguel aluguel = new Aluguel(c);
+        aluguel.adicionarHorario(h);
 
-        Aluguel aluguel = new Aluguel(c1);
+        AluguelController controller = new AluguelController();
+        ConsoleView view = new ConsoleView();
 
-        aluguel.adicionarHorario(h1);
-        aluguel.adicionarHorario(h2);
+        controller.criarAluguel(aluguel);
 
-        System.out.println("Cliente: " + c1.getNome());
-        System.out.println("Total: R$ " + aluguel.calcularTotal());
-
-        List<Aluguel> alugueis = new ArrayList<>();
-        alugueis.add(aluguel);
-
-        System.out.println("\nAlugueis do dia:");
-        for (Aluguel a : alugueis) {
-            System.out.println("Cliente: " + a.getCliente().getNome());
-        }
+        view.mostrarAlugueis(controller.listarAlugueis());
     }
 }
